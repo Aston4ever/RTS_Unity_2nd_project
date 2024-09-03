@@ -29,11 +29,13 @@ public class PlayerMove : MonoBehaviour {
     private float rotationVelocity;
     
     private CharacterController controller;
+    private PlayerAnimations anims;
 
     private Vector3 inputDir;
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         controller = GetComponent<CharacterController>();
+        anims = GetComponentInChildren<PlayerAnimations>();
     }
 
     private void FixedUpdate() {
@@ -52,6 +54,7 @@ public class PlayerMove : MonoBehaviour {
         DoRotation();
         CheckForJump();
         DoMovement();
+        DoAnimations();
     }
 
     private void CheckForJump() {
@@ -97,5 +100,13 @@ public class PlayerMove : MonoBehaviour {
         moveDirection.y = inputDir.y;
         
         controller.Move( moveDirection * Time.deltaTime );
+    }
+
+    private void DoAnimations() {
+        if ( inputDir.x != 0 || inputDir.z != 0) {
+            anims.SetWalkAnimation(true);
+        } else {
+            anims.SetWalkAnimation(false);
+        }
     }
 }
