@@ -4,14 +4,26 @@ using System.Threading;
 using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour {
-    private const string walkStr = "Walk";
+    [SerializeField] private float blendPower = 0.2f;
+    [SerializeField] private float blendSpeed = 25f;
+
+    private const string blendStr = "MotionSpeed";
+    private const string jumpStr = "Jump";
+    private const string fallStr = "Fall";
     private Animator animator;
+    private float animationBlend;
     void Start() {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    public void SetWalkAnimation( bool isWalking ) {
-        animator.SetBool(walkStr, isWalking);
+    public void SetJumpAnim() {
+        animator.SetTrigger(jumpStr);
+    }
+    public void SetFallAnim(bool isFalling) {
+        animator.SetBool(fallStr, isFalling);
+    }
+    public void SetMotionSpeed( float value ) {
+        animationBlend = Mathf.Lerp( animationBlend, value * blendPower, Time.deltaTime * blendSpeed );
+        animator.SetFloat(blendStr, animationBlend);
     }
 }
