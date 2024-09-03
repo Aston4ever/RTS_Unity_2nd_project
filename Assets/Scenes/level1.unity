@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19944407}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.96099997, z: 0.47499847}
+  m_LocalPosition: {x: 0, y: 0.78999996, z: 0.3789978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -526,7 +526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149427039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.961, z: 0.475}
+  m_LocalPosition: {x: 0, y: 0.79, z: 0.379}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -555,6 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4258eb01b6b8914e90a650a35f169fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blendPower: 0.2
+  blendSpeed: 25
 --- !u!1001 &496220799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -684,8 +686,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jump: 3
-  gravity: 0.03
+  runSpeed: 10
+  jump: 5
+  gravity: 0.05
   rotationSpeed: 1
   cameraTarget: {fileID: 149427040}
   topClamp: 90
@@ -1665,7 +1668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749076088}
   m_LocalRotation: {x: -0.045623604, y: -0.32735056, z: 0.01582661, w: -0.94366825}
-  m_LocalPosition: {x: 97.34776, y: 7.277, z: 102.84806}
+  m_LocalPosition: {x: 97.34776, y: 7.106, z: 102.75206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

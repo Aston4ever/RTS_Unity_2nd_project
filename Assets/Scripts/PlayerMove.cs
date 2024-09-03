@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
     [Header("Params")]
     [Range(1,10)][SerializeField] private float speed = 5f;
+    [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float jump = 2f;
     [SerializeField] private float gravity = 0.03f;
 
@@ -32,10 +33,12 @@ public class PlayerMove : MonoBehaviour {
     private PlayerAnimations anims;
 
     private Vector3 inputDir;
+    private float curSpeed = 5f;
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         controller = GetComponent<CharacterController>();
         anims = GetComponentInChildren<PlayerAnimations>();
+        curSpeed = speed;
     }
 
     private void FixedUpdate() {
@@ -94,19 +97,31 @@ public class PlayerMove : MonoBehaviour {
 
         mouseX = Input.GetAxis( "Mouse X" );
         mouseY = Input.GetAxis( "Mouse Y" );
+
+        if ( Input.GetKey(KeyCode.LeftShift) ) {
+            curSpeed = runSpeed;
+        } else {
+            curSpeed = speed;
+        }
     }
     private void DoMovement() {
-        Vector3 moveDirection = transform.TransformDirection( inputDir ) * speed;
+        Vector3 moveDirection = transform.TransformDirection( inputDir ) * curSpeed;
         moveDirection.y = inputDir.y;
         
         controller.Move( moveDirection * Time.deltaTime );
     }
 
     private void DoAnimations() {
-        if ( inputDir.x != 0 || inputDir.z != 0) {
-            anims.SetWalkAnimation(true);
+        anims.SetMotionSpeed(inputDir.normalized.magnitude * curSpeed);
+
+        if ( Input.GetKeyDown(KeyCode.Space) ) {
+            anims.SetJumpAnim();
+        }
+
+        if ( isGrounded ) {
+            anims.SetFallAnim(false);
         } else {
-            anims.SetWalkAnimation(false);
+            anims.SetFallAnim(true);
         }
     }
 }
